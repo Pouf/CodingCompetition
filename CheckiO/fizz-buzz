@@ -1,0 +1,10 @@
+def checkio(inNumber):
+    if inNumber % 3 == 0:
+        if inNumber % 5 == 0:
+            outValue = "Fizz Buzz"
+        else:
+            outValue = "Fizz"
+    elif inNumber % 5 == 0:
+        outValue = "Buzz"
+    else: outValue = str(inNumber)
+    return outValue
