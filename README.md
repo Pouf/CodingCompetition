@@ -1,7 +1,7 @@
 # CodingCompetition
 
 
-Checkio
-Project Euler
-Google Code Jam
+Checkio  
+Project Euler  
+Google Code Jam  
 SPhere Online Judge
