@@ -18,7 +18,7 @@ def euler02():
 euler02()
 
 
-# V2
+# better fib function
 
 def fibonacci(n):
     return fib(n)[0]
