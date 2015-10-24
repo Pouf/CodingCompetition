@@ -9,4 +9,4 @@ def checkio(number):
             return pTotal + max(number - pTotal, 0)
         pTotal += pNew
         number -= pTotal
-    return pTotal
+    return pTotal  
