@@ -29,4 +29,4 @@ def checkio(d):
         if C[n] == int(C[n]):
             C[n] = int(C[n])
     
-    return '(x-{})^2+(y-{})^2={}^2'.format(C[0], C[1], C[2])
+    return '(x-{})^2+(y-{})^2={}^2'.format(C[0], C[1], C[2])  
