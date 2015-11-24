@@ -1,5 +1,5 @@
 from itertools import groupby
-​
+
 def total_cost(calls):
     total = 0
     for k,g in groupby(calls, lambda x:x[:10]):
