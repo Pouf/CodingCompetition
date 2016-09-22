@@ -27,43 +27,10 @@ T = int(I.readline())
 from collections import Counter
 
 for x in range(T):
-	y = ''
-	S = I.readline().rstrip()
-	def gotcha(s, num):
-		for l in num:
-			s = s.replace(l, '', 1)
-		return s, str(["ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"].index(num))
-	while 'Z' in S:
-		S, z = gotcha(S, 'ZERO')
-		y += z
-	while 'W' in S:
-		S, z = gotcha(S, 'TWO')
-		y += z
-	while 'U' in S:
-		S, z = gotcha(S, 'FOUR')
-		y += z
-	while 'X' in S:
-		S, z = gotcha(S, 'SIX')
-		y += z
-	while 'G' in S:
-		S, z = gotcha(S, 'EIGHT')
-		y += z
-	while 'F' in S:
-		S, z = gotcha(S, 'FIVE')
-		y += z
-	while 'H' in S:
-		S, z = gotcha(S, 'THREE')
-		y += z
-	while 'O' in S:
-		S, z = gotcha(S, 'ONE')
-		y += z
-	while 'S' in S:
-		S, z = gotcha(S, 'SEVEN')
-		y += z
-	while 'I' in S:
-		S, z = gotcha(S, 'NINE')
-		y += z
-	y = ''.join(sorted(y))
+	N = int(I.readline())
+	S = [int(s) for l in range(2*N-1) for s in I.readline().rstrip().split()]
+	y = ' '.join(str(t) for t in sorted(set(s for s in S if S.count(s) % 2)))
+	
 	O.write('{}Case #{}: {}'.format(['', '\n'][x > 0], x+1, y))
 
 I.close()
