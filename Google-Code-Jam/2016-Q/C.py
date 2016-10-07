@@ -15,7 +15,7 @@ elif '{}-test'.format(scriptFile) in str(files):
 else:
   print('{}-test not found'.format(scriptFile))
   sys.exit()
-latest = sorted(f for f in files if size in f)[0][:-3]
+latest = sorted(f for f in files if size in f)[-1][:-3]
 f = '{}/{}'.format(scriptPath, latest)
 i = open(f + '.in', 'r')
 o = open(f + '.out', 'w')
