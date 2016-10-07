@@ -13,6 +13,8 @@ o = open(f + '.out', 'w')
 print(f)
 T = int(i.readline())
 
+# https://code.google.com/codejam/contest/6254486/dashboard#s=p0
+# Problem A. Counting Sheep
 
 import string
 

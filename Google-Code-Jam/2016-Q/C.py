@@ -22,6 +22,8 @@ o = open(f + '.out', 'w')
 print(f)
 T = int(i.readline())
 
+# https://code.google.com/codejam/contest/6254486/dashboard#s=p2
+# Problem C. Coin Jam
 
 from itertools import *
 import numpy

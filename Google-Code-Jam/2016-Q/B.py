@@ -21,6 +21,8 @@ o = open(f + '.out', 'w')
 print(f)
 T = int(i.readline())
 
+# https://code.google.com/codejam/contest/6254486/dashboard#s=p1
+# Problem B. Revenge of the Pancakes
 
 for x in range(T):
   S = list(i.readline().rstrip())

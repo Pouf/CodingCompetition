@@ -22,6 +22,8 @@ o = open(f + '.out', 'w')
 print(f)
 T = int(i.readline())
 
+# https://code.google.com/codejam/contest/6254486/dashboard#s=p3
+# Problem D. Fractiles
 
 for x in range(T):
   K, C, S = map(int, i.readline().split())
