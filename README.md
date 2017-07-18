@@ -1,6 +1,6 @@
 # CodingCompetition
 
-CheckiO
-Euler Project
-Google Code Jam
+CheckiO  
+Euler Project  
+Google Code Jam  
 CodinGame
