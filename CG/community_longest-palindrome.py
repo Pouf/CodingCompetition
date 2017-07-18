@@ -8,7 +8,7 @@
 text = input()
 result = []
 
-data = "|%s|" % ("|".join(text))
+data = '|{}|'.format('|'.join(text))
 right, center = 0, 0
 m, n = 0, 0
 d_len = len(data)
