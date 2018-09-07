@@ -7,14 +7,14 @@ scriptPath = os.path.dirname(script)
 scriptFile = os.path.basename(script)[0]
 files = [f for f in os.listdir(scriptPath) if scriptFile in f and '.in' in f]
 if '{}-large'.format(scriptFile) in str(files):
-  size = 'large'
+    size = 'large'
 elif '{}-small'.format(scriptFile) in str(files):
-  size = 'small'
+    size = 'small'
 elif '{}-test'.format(scriptFile) in str(files):
-  size = 'test'
+    size = 'test'
 else:
-  print('{}-test not found'.format(scriptFile))
-  sys.exit()
+    print('{}-test not found'.format(scriptFile))
+    sys.exit()
 latest = sorted(f for f in files if size in f)[-1][:-3]
 f = '{}/{}'.format(scriptPath, latest)
 i = open(f + '.in', 'r')
@@ -26,12 +26,12 @@ T = int(i.readline())
 # Problem A. The Last Word
 
 for x in range(T):
-  S = list(i.readline().rstrip())
-  y = S[0]
-  for s in S[1:]:
-    y = max(y + s, s + y)
+    S = list(i.readline().rstrip())
+    y = S[0]
+    for s in S[1:]:
+        y = max(y + s, s + y)
 
-  o.write('{}Case #{}: {}'.format(['', '\n'][x > 0], x + 1, y))
+    o.write('{}Case #{}: {}'.format(['', '\n'][x > 0], x + 1, y))
 
 i.close()
 o.close()
