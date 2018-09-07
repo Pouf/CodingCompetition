@@ -1,2 +1,2 @@
 def checkio(d):
-  eval('+'.join(map(str,d)))
+    eval('+'.join(map(str,d)))
