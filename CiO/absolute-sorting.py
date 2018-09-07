@@ -1,2 +1,2 @@
 def checkio(t):
-  return sorted(t, key=abs)
+    return sorted(t, key=abs)
