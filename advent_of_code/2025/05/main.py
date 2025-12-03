@@ -6,9 +6,9 @@ def main(test_input: list[str]) -> typing.Iterator[typing.Any]:
     result = 0
     for line in test_input:
         batteries = list(line)
-        best = max(batteries[:-1]
+        best = max(batteries[:-1])
         position = batteries.index(best)
-        remaining = vatteries[position:]
+        remaining = batteries[position+1:]
         next_best = max(remaining)
         result += int(f"{best}{next_best}")
   
