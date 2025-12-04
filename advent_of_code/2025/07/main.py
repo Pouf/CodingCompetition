@@ -3,7 +3,11 @@ from utils import setup
 
 
 def main(test_input: list[str]) -> typing.Iterator[typing.Any]:
-    DIRECTIONS = (1, -1, 1j, -1j, 1+1j, 1-1j, -1+1j, -1-1j)
+    DIRECTIONS = (
+        -1-1j, -1, -1+1j,
+          -1j,       +1j,
+        +1-1j, +1, +1+1j,
+    )
     result = 0
     floor_plan = dict()
     for x, row in enumerate(test_input):
