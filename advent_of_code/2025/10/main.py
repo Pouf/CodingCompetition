@@ -1,8 +1,8 @@
-import typing
+from typing import Iterator, Any
 from utils import setup
 
 
-def main(test_input: list[str]) -> typing.Iterator[typing.Any]:
+def main(test_input: Iterator[str]) -> Iterator[Any]:
     result = 0
 
     ranges = set()

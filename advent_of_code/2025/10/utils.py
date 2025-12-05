@@ -4,6 +4,7 @@ import re
 import sys
 from pathlib import Path
 from itertools import zip_longest
+from typing import Iterator
 
 
 LOGGER = logging.getLogger(__name__)
@@ -82,21 +83,22 @@ def get_files_suffix(files: Path) -> str:
     return ""
 
 
-def get_test(file_type: str, test_number: int) -> list[str]:
+def get_test(file_type: str, test_number: int) -> Iterator[str]:
     this_dir = Path(__file__).parent
     file_path = this_dir / f"{file_type}{test_number}.txt"
     if file_path.is_file():
-        return get_file_contents(file_path)
+        yield from get_file_contents(file_path)
     else:
-        return []
+        yield from ()
 
 
-def get_file_contents(file_path: Path) -> list[str]:
+def get_file_contents(file_path: Path) -> Iterator[str]:
     with file_path.open("r", encoding="utf-8") as f:
-        return [line.strip() for line in f.readlines()]
+        for line in f.readlines():
+            yield line.strip()
 
 
-def write_result(test_number: int, test_input: list[str], func) -> list[str]:
+def write_result(test_number: int, test_input: Iterator[str], func) -> list[str]:
     this_dir = Path(__file__).parent
     result_file_path = this_dir / f"my_result{test_number}.txt"
     result = [str(line).strip() for line in func(test_input)]
@@ -106,7 +108,7 @@ def write_result(test_number: int, test_input: list[str], func) -> list[str]:
     return result
 
 
-def check_result(test_output: list[str], actual_output: list[str]) -> bool:
+def check_result(test_output: Iterator[str], actual_output: list[str]) -> bool:
     errors = []
     for line, (expected_output, my_output) in enumerate(
         zip_longest(test_output, actual_output, fillvalue=""), 1
