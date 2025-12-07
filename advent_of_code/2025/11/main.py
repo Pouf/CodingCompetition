@@ -1,3 +1,5 @@
+from functools import reduce
+from operator import mul
 from typing import Iterator, Any
 from utils import setup
 
@@ -5,26 +7,19 @@ from utils import setup
 def main(test_input: Iterator[str]) -> Iterator[Any]:
     result = 0
 
-    ranges = set()
-    for line in test_input:
-        try:
-            start, stop = map(int, line.split("-"))
-            ranges.add((start, stop + 1))
-        except ValueError:  # Empty line
-            break
-
-    sorted_ranges = sorted(ranges, reverse=True)
-    while sorted_ranges:
-        start, stop = sorted_ranges.pop()
-        while sorted_ranges:
-            next_start, next_stop = sorted_ranges[-1]
-            if next_start <= stop:
-                stop = max(stop, next_stop)
-                sorted_ranges.pop()
-            else:
-                break
-        result += stop - start
-
+    matrix = (
+        c := line.split()
+        for line in test_input
+        if c
+    )
+    transposed = zip(*matrix)
+    for line in transposed:
+        *numbers_as_str, operator = line
+        numbers = map(int, numbers_as_str)
+        if operator == "+":
+            result += sum(numbers)
+        else:
+            result += reduce(mul, numbers, 1)
     yield result
 
 
