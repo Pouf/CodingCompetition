@@ -43,7 +43,7 @@ def setup(func):
     for test_number in test_numbers:
         LOGGER.debug(f"Running test number {test_number}...")
         test_input = get_test("input", test_number)
-        test_output = get_test("output", test_number)
+        test_output = list(get_test("output", test_number))
         my_result = write_result(test_number, test_input, func)
         if test_output:
             LOGGER.debug("Test output found, checking results...")
@@ -95,20 +95,20 @@ def get_test(file_type: str, test_number: int) -> Iterator[str]:
 def get_file_contents(file_path: Path) -> Iterator[str]:
     with file_path.open("r", encoding="utf-8") as f:
         for line in f.readlines():
-            yield line.strip()
+            yield line
 
 
 def write_result(test_number: int, test_input: Iterator[str], func) -> list[str]:
     this_dir = Path(__file__).parent
     result_file_path = this_dir / f"my_result{test_number}.txt"
-    result = [str(line).strip() for line in func(test_input)]
+    result = [str(line) for line in func(test_input)]
     with result_file_path.open("w", encoding="utf-8") as result_file:
         result_file.write("\n".join(result))
     LOGGER.debug(f"Result written in {result_file_path}")
     return result
 
 
-def check_result(test_output: Iterator[str], actual_output: list[str]) -> bool:
+def check_result(test_output: list[str], actual_output: list[str]) -> bool:
     errors = []
     for line, (expected_output, my_output) in enumerate(
         zip_longest(test_output, actual_output, fillvalue=""), 1

@@ -8,9 +8,8 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
     result = 0
 
     matrix = (
-        c := line.split()
+        (c for c in line.split() if c)
         for line in test_input
-        if c
     )
     transposed = zip(*matrix)
     for line in transposed:
