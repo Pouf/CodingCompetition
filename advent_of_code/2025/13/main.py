@@ -9,23 +9,30 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
     #   -1j   X    +1j
     # +1-1j  +1  +1+1j
     stack = set()
-    floor_plan = dict()
+    edges = dict()
+
+    # Building DAG
     for x, row in enumerate(test_input):
         for y, symbol in enumerate(row):
-            floor_plan[x+y*1j] = symbol
-            if symbol == "S":
-                stack.add(x+1 + y*1j})
-    
+            coords = x + y*1j
+            if symbol in ("S", "."):
+                if symbol == "S":
+                    stack.add(coords)
+                edges[coords] = set(coords + 1)  # Down
+            elif symbol == "^":
+                edges[coords] = {
+                    coords - 1j,  # Left
+                    coords + 1j,  # Right
+                }
+
+    # Going through DAG
     while stack:
         current = stack.pop()
+        next = edges[current]
+        if len(next) == 2:
+            splits += 1
         visited.add(current)
-        if floor_plan[current] == ".":
-            down = current + 1
-            stack.add(down)
-        next = floor_plan[down]
-        if next == "^":
-            left = current
-        stack -= visited
+        stack = stack | next - visited
 
     yield splits
 
