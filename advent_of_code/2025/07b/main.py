@@ -3,12 +3,12 @@ from utils import setup
 
 
 def main(test_input: Iterator[str]) -> Iterator[Any]:
-    splits = 0
+    result = 0
     
     # -1-1j  -1  -1+1j
     #   -1j   X    +1j
     # +1-1j  +1  +1+1j
-    stack = set()
+    stack = list()
     edges = dict()
 
     # Building DAG
@@ -17,24 +17,25 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
             coords = x + y*1j
             if symbol in ("S", "."):
                 if symbol == "S":
-                    stack.add(coords)
-                edges[coords] = set(coords + 1)  # Down
+                    stack.append(coords)
+                edges[coords] = [coords + 1]  # Down
             elif symbol == "^":
-                edges[coords] = {
+                edges[coords] = [
                     coords - 1j,  # Left
                     coords + 1j,  # Right
-                }
+                ]
 
     # Going through DAG
     while stack:
         current = stack.pop()
-        next = edges[current]
-        if len(next) == 2:
-            splits += 1
-        visited.add(current)
-        stack = stack | next - visited
+        try:
+            next_nodes = edges[current]
+        except KeyError:  # Out of bounds !
+            result += 1
+        else:
+            stack += next_nodes
 
-    yield splits
+    yield result
 
 
 if __name__ == "__main__":
