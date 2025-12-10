@@ -3,37 +3,39 @@ from utils import setup
 
 
 def main(test_input: Iterator[str]) -> Iterator[Any]:
+    """
+    Directions:
+    -1-1j  -1  -1+1j
+      -1j   X    +1j
+    +1-1j  +1  +1+1j
+    """
     result = 0
-    
-    # -1-1j  -1  -1+1j
-    #   -1j   X    +1j
-    # +1-1j  +1  +1+1j
-    stack = list()
-    edges = dict()
+    floor_plan = dict()
+    stack: list[complex] = []
 
-    # Building DAG
+    # Building nodes
     for x, row in enumerate(test_input):
+        if x % 2:
+            continue  # Skip useless empty rows
         for y, symbol in enumerate(row):
-            coords = x + y*1j
-            if symbol in ("S", "."):
-                if symbol == "S":
-                    stack.append(coords)
-                edges[coords] = [coords + 1]  # Down
-            elif symbol == "^":
-                edges[coords] = [
-                    coords - 1j,  # Left
-                    coords + 1j,  # Right
-                ]
+            coords = x//2 + y*1j
+            floor_plan[coords] = symbol
+            if symbol == "S":
+                stack.append(coords)
 
-    # Going through DAG
+    # DAG traversal
     while stack:
         current = stack.pop()
-        try:
-            next_nodes = edges[current]
-        except KeyError:  # Out of bounds !
+        down = current + 1
+        symbol_below = floor_plan.get(down)
+        if symbol_below in ("S", "."):
+            stack.append(down)
+        elif symbol_below == "^":
+            down_left = down - 1j
+            down_right = down + 1j
+            stack += [down_left, down_right]
+        elif symbol_below is None:
             result += 1
-        else:
-            stack += next_nodes
 
     yield result
 
