@@ -95,7 +95,7 @@ def get_test(file_type: str, test_number: int) -> Iterator[str]:
 def get_file_contents(file_path: Path) -> Iterator[str]:
     with file_path.open("r", encoding="utf-8") as f:
         for line in f.readlines():
-            yield line
+            yield line.rstrip("\r\n")
 
 
 def write_result(test_number: int, test_input: Iterator[str], func) -> list[str]:
