@@ -20,17 +20,15 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
             if distance:
                 pairs.setdefault(distance, set()).add(frozenset((i, j)))
 
-    graphs = get_graphs(pairs, points)
-    graphs.sort(key=len)
+    result = connect_junctions(pairs, points)
 
-    yield len(graphs.pop()) * len(graphs.pop()) * len(graphs.pop())
+    yield result
 
 
-def get_graphs(pairs: dict[float, set[frozenset[int]]], points: np.ndarray) -> list[set[int]]:
+def connect_junctions(pairs: dict[float, set[frozenset[int]]], points: np.ndarray) -> int:
     graphs = [set([i]) for i in range(len(points))]
     min_distances = sorted(pairs.keys())
-    connections = 0
-    max_connections = 10 if len(points) == 20 else len(points)
+
     for distance in min_distances:
         for p1, p2 in pairs[distance]:
             in_graphs = []
@@ -48,10 +46,9 @@ def get_graphs(pairs: dict[float, set[frozenset[int]]], points: np.ndarray) -> l
                     graphs[a] |= graphs[b] | {p1, p2}
                     del graphs[b]
 
-            connections += 1
-            if connections == max_connections:
-                return graphs
-    return graphs
+            if len(graphs) == 1:
+                return points[p1][0] * points[p2][0]
+    return points[p1][0] * points[p2][0]
 
 
 if __name__ == "__main__":
