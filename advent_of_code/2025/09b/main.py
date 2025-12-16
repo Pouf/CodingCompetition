@@ -7,20 +7,16 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
     points = []
     for line in test_input:
         points.append(Point(*(int(x) for x in line.split(","))))
-    polygon = Polygon([point for point in points])
-    areas = []
-    for point in points:
-        for other_point in points:
-            if point == other_point:
-                continue
-            rectangle = Polygon([
-                (point.x, point.y),
-                (point.x, other_point.y),
-                (other_point.x, other_point.y),
-                (other_point.x, point.y),
-            ])
-            if polygon.contains(rectangle):
-                areas.append(area(point, other_point))
+    polygon = Polygon(points)
+    areas = (
+        area(p1, p2) for i, p1 in enumerate(points) for p2 in points[i + 1 :]
+        if polygon.contains(Polygon([
+            p1,
+            (p1.x, p2.y),
+            p2,
+            (p2.x, p1.y),
+        ]))
+    )
     yield max(areas)
 
 
