@@ -38,7 +38,7 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
 def match_diagram(diagram, wirings) -> int:
     if diagram == 0:
         return 0
-    for i in range(1, len(wirings)):
+    for i in range(1, len(wirings) + 1):
         for comb in combinations(wirings, i):
             if reduce(xor, comb, 0) == diagram:
                 return i
