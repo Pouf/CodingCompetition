@@ -2,8 +2,8 @@ from typing import Iterator, Any
 from utils import setup
 from ast import literal_eval
 from functools import reduce
-from operator import xor
-drom itertools import combinations
+from operator import xor, and
+from itertools import combinations
 
 
 def main(test_input: Iterator[str]) -> Iterator[Any]:
@@ -17,15 +17,21 @@ def main(test_input: Iterator[str]) -> Iterator[Any]:
             .replace("#", "1"),
             base=2
         )
-        base = "0" * (len(diagram) - 2)
-        print(base)
         bin_wirings = []
         for wire in wirings:
-            bin_wire = base
-            for pos in literal_eval(wiring):
-                bin_wire[pos] = 1
-            bin_wirings.append(int(bin_wire, base=2))
-        result += match_diagram(bin_diagram, bin_wirings)
+            bin_wire = int(
+                reduce(
+                    and,
+                    literal_eval(wire),
+                    0
+                ),
+                base=2
+            )
+            bin_wirings.append(bin_wire)
+        result += match_diagram(
+            bin_diagram,
+            bin_wirings
+        )
 
 
 def match_diagram(diagram, wirings) -> int:
@@ -33,7 +39,7 @@ def match_diagram(diagram, wirings) -> int:
         return 0
     for i in range(1, len(wirings)):
         for comb in combinations(wirings):
-            if reduce(xor, comb, 1) == diagram:
+            if reduce(xor, comb, 0) == diagram:
                 return i
 
 
