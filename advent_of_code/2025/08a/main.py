@@ -4,7 +4,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 
-def main(test_input: Iterator[str]) -> Iterator[Any]:
+def main(test_input: list[str]) -> Iterator[Any]:
     points = np.array([
         [int(x) for x in line.split(",")]
         for line in test_input

@@ -1,5 +1,5 @@
-from utils import setup
 from typing import Iterator, Any
+from utils import setup
 
 
 def main(test_input: list[str]) -> Iterator[Any]:

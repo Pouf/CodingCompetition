@@ -1,6 +1,6 @@
 import re
-from utils import setup
 from typing import Iterator, Any
+from utils import setup
 from z3 import IntVector, Optimize, Sum
 
 

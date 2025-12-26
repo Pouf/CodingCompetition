@@ -2,7 +2,7 @@ from typing import Iterator, Any
 from utils import setup
 
 
-def main(test_input: Iterator[str]) -> Iterator[Any]:
+def main(test_input: list[str]) -> Iterator[Any]:
     points = []
     for line in test_input:
         points.append(tuple(int(x) for x in line.split(",")))

@@ -1,10 +1,10 @@
-from utils import setup
 from typing import Iterator, Any
+from utils import setup
 
 
 def main(test_input: list[str]) -> Iterator[Any]:
     result = 0
-    for line in test_input:
+    while test_input:
         result += 1
     yield result
 

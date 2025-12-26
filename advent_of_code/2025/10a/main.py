@@ -1,12 +1,12 @@
 import re
+from functools import reduce
+from itertools import combinations
+from operator import xor
 from typing import Iterator, Any
 from utils import setup
-from functools import reduce
-from operator import xor
-from itertools import combinations
 
 
-def main(test_input: Iterator[str]) -> Iterator[Any]:
+def main(test_input: list[str]) -> Iterator[Any]:
     result = 0
     for line in test_input:
         diagram, *wirings, _ = line.split()

@@ -3,7 +3,7 @@ from typing import Iterator, Any
 from utils import setup
 
 
-def main(test_input: Iterator[str]) -> Iterator[Any]:
+def main(test_input: list[str]) -> Iterator[Any]:
     nodes = tuple(test_input)
     start = (0, nodes[0].index("S"))
     yield get_nb_paths(start, nodes)

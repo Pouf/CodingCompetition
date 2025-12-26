@@ -3,7 +3,7 @@ from utils import setup
 from shapely import Point, Polygon
 
 
-def main(test_input: Iterator[str]) -> Iterator[Any]:
+def main(test_input: list[str]) -> Iterator[Any]:
     points = []
     for line in test_input:
         points.append(Point(*(int(x) for x in line.split(","))))
