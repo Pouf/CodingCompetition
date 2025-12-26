@@ -18,9 +18,10 @@ def main(test_input: list[str]) -> Iterator[Any]:
                 continue
             new_path = f"{path}.{new_node}"
             if new_node == "out":
-                print(path)
-                complete_paths.add(path)
-            stack.add(path)
+                print(new_path)
+                complete_paths.add(new_path)
+            else:
+                stack.add(new_path)
     yield len(complete_paths)
 
 
